@@ -33,7 +33,13 @@ BitSeq/getVariance -o Mopti-T3-YY_S189.mean Mopti-T3-YY_S189.rpkm
 
 #high-throughput
 #Mopti
-for file in Mopti*sam
+for file in Mopti-C*sam
+do
+BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile Acol_genes.tr-NEW --uniform --verbose
+BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t Acol_genes.tr-NEW -P 2
+BitSeq/getVariance -o $(basename $file .sam).mean $(basename $file .sam).rpkm
+done
+for file in Mopti-T*sam
 do
 BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile Acol_genes.tr-NEW --uniform --verbose
 BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t Acol_genes.tr-NEW -P 2
@@ -41,7 +47,14 @@ BitSeq/getVariance -o $(basename $file .sam).mean $(basename $file .sam).rpkm
 done
 
 #cyp1
-for file in cyp1*sam
+for file in cyp1-C*sam
+do
+BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile Acol_genes.tr-NEW --uniform --verbose
+BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t Acol_genes.tr-NEW -P 2
+BitSeq/getVariance -o $(basename $file .sam).mean $(basename $file .sam).rpkm
+done
+
+for file in cyp1-T*sam
 do
 BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile Acol_genes.tr-NEW --uniform --verbose
 BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t Acol_genes.tr-NEW -P 2
