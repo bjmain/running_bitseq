@@ -73,6 +73,6 @@ BitSeq/estimateHyperPar --meanFile Mopti.Lmean -o Mopti.param Mopti-C*rpkm C Mop
 BitSeq/estimateHyperPar --meanFile cyp1.Lmean -o cyp1.param cyp1-C*rpkm C cyp1-T*rpkm
 
 #estimate differential expression
-BitSeq/estimateDE -o Mopti -p Mopti.param Mopti.param Mopti-C*rpkm C Mopti-T*rpkm
-BitSeq/estimateDE -o cyp1 -p cyp1.param cyp1.param cyp1-C*rpkm C cyp1-T*rpkm
+BitSeq/estimateDE -o Mopti -p Mopti.param Mopti-C*rpkm C Mopti-T*rpkm
+BitSeq/estimateDE -o cyp1 -p cyp1.param cyp1-C*rpkm C cyp1-T*rpkm
 
