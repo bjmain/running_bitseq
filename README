@@ -60,3 +60,19 @@ BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles
 BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t Acol_genes.tr-NEW -P 2
 BitSeq/getVariance -o $(basename $file .sam).mean $(basename $file .sam).rpkm
 done
+
+---
+#differential expression
+
+#compute overall mean and variance for each transcript
+BitSeq/getVariance --log -o Mopti.Lmean Mopti*.rpkm 
+BitSeq/getVariance --log -o cyp1.Lmean cyp1*.rpkm 
+
+#estimate expression dependent hyperparameters
+BitSeq/estimateHyperPar --meanFile Mopti.Lmean -o Mopti.param Mopti-C*rpkm C Mopti-T*rpkm
+BitSeq/estimateHyperPar --meanFile cyp1.Lmean -o cyp1.param cyp1-C*rpkm C cyp1-T*rpkm
+
+#estimate differential expression
+BitSeq/estimateDE -o Mopti -p Mopti.param Mopti.param Mopti-C*rpkm C Mopti-T*rpkm
+BitSeq/estimateDE -o cyp1 -p cyp1.param cyp1.param cyp1-C*rpkm C cyp1-T*rpkm
+
