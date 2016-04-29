@@ -20,10 +20,14 @@ for line in open("Anopheles-coluzzii-Mali-NIH_BASEFEATURES_AcolM1.2.gtf"):
     L=int(i[4]) - int(i[3]) +1
     print gene, tr, L
 > Acol_genes.tr    
+#This is not necessary. I'll delete.
 
 ---
 #test command - pre-processing
 BitSeq/parseAlignment Mopti-T3-YY_S189.sam -o Mopti-T3-YY_S189.prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile Acol_genes.tr --uniform --verbose
+#testing with no input .tr file
+BitSeq/parseAlignment Mopti-T3-YY_S189.sam -o Mopti-T3-YY_S189_no_tr.prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile --uniform --verbose
+
 
 #sampling
 BitSeq/estimateExpression Mopti-T3-YY_S189.prob -o Mopti-T3-YY_S189 --outType RPKM -p parameters1.txt -t Acol_genes.tr-NEW -P 2
@@ -31,33 +35,34 @@ BitSeq/estimateExpression Mopti-T3-YY_S189.prob -o Mopti-T3-YY_S189 --outType RP
 #compute the mean and variance:
 BitSeq/getVariance -o Mopti-T3-YY_S189.mean Mopti-T3-YY_S189.rpkm
 
+#re-running with sample-specific tr files.
 #high-throughput
 #Mopti
 for file in Mopti-C*sam
 do
-BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile Acol_genes.tr-NEW --uniform --verbose
-BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t Acol_genes.tr-NEW -P 2
+BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile $(basename $file .sam).tr --uniform --verbose
+BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t $(basename $file .sam).tr -P 2
 BitSeq/getVariance -o $(basename $file .sam).mean $(basename $file .sam).rpkm
 done
 for file in Mopti-T*sam
 do
-BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile Acol_genes.tr-NEW --uniform --verbose
-BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t Acol_genes.tr-NEW -P 2
+BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile $(basename $file .sam).tr --uniform --verbose
+BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t $(basename $file .sam).tr -P 2
 BitSeq/getVariance -o $(basename $file .sam).mean $(basename $file .sam).rpkm
 done
 
 #cyp1
 for file in cyp1-C*sam
 do
-BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile Acol_genes.tr-NEW --uniform --verbose
-BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t Acol_genes.tr-NEW -P 2
+BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile $(basename $file .sam).tr --uniform --verbose
+BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t $(basename $file .sam).tr -P 2
 BitSeq/getVariance -o $(basename $file .sam).mean $(basename $file .sam).rpkm
 done
 
 for file in cyp1-T*sam
 do
-BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile Acol_genes.tr-NEW --uniform --verbose
-BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t Acol_genes.tr-NEW -P 2
+BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile $(basename $file .sam).tr --uniform --verbose
+BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t $(basename $file .sam).tr -P 2
 BitSeq/getVariance -o $(basename $file .sam).mean $(basename $file .sam).rpkm
 done
 
