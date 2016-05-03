@@ -7,8 +7,6 @@ make
 
 
 #test command - pre-processing
-BitSeq/parseAlignment Mopti-T3-YY_S189.sam -o Mopti-T3-YY_S189.prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile Acol_genes.tr --uniform --verbose
-#testing with no input .tr file
 BitSeq/parseAlignment Mopti-T3-YY_S189.sam -o Mopti-T3-YY_S189_no_tr.prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile --uniform --verbose
 
 
