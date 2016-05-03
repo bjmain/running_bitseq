@@ -1,4 +1,5 @@
 # running_bitseq
+http://bitseq.github.io/
 
 #install
 git clone https://github.com/BitSeq/BitSeq.git
@@ -62,4 +63,14 @@ BitSeq/estimateHyperPar --meanFile cyp1.Lmean -o cyp1.param cyp1-C*rpkm C cyp1-T
 BitSeq/estimateDE -o Mopti -p Mopti.param Mopti-C*rpkm C Mopti-T*rpkm
 BitSeq/estimateDE -o cyp1 -p cyp1.param cyp1-C*rpkm C cyp1-T*rpkm
 
+------------
 
+#Mopti Treatment versus cyp1 treatment
+#compute overall mean and variance for each transcript
+BitSeq/getVariance --log -o all.Lmean *.rpkm 
+
+#estimate expression dependent hyperparameters
+BitSeq/estimateHyperPar --meanFile all.Lmean -o all.param Mopti-T*rpkm C cyp1-T*rpkm
+
+#estimate differential expression
+BitSeq/estimateDE -o all -p all.param Mopti-T*rpkm C cyp1-T*rpkm
