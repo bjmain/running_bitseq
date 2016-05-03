@@ -69,5 +69,4 @@ notebook:
 terminal:
 ssh -tL 9000:localhost:9543 bradmain@169.237.175.247 jupyter notebook --no-browser --port 9543 --port-retries=0
 web:
-http://localhost:9000/notebooks/gambiae/malphigs/Acol/cyp_expression.ipynb#
 localhost:9000/notebooks/gambiae/malphigs/Acol/cyp_expression.ipynb#
