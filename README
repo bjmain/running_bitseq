@@ -95,6 +95,11 @@ BitSeq/estimateDE -o cyp1 -p cyp1.param cyp1-C*rpkm C cyp1-T*rpkm
 BitSeq/estimateDE -o Mopti_rmdup -p Mopti_rmdup.param Mopti-C*rmdup.rpkm C Mopti-T*rmdup.rpkm
 BitSeq/estimateDE -o cyp1_rmdup -p cyp1_rmdup.param cyp1-C*rmdup.rpkm C cyp1-T*rmdup.rpkm
 
+#run sequential commands in a screen:
+BitSeq/getVariance --log -o Mopti_rmdup.Lmean Mopti*rmdup.rpkm ; BitSeq/estimateHyperPar --meanFile Mopti_rmdup.Lmean -o Mopti_rmdup.param Mopti-C*rmdup.rpkm C Mopti-T*rmdup.rpkm ; BitSeq/estimateDE -o Mopti_rmdup -p Mopti_rmdup.param Mopti-C*rmdup.rpkm C Mopti-T*rmdup.rpkm
+BitSeq/getVariance --log -o cyp1_rmdup.Lmean cyp1*rmdup.rpkm ; BitSeq/estimateHyperPar --meanFile cyp1_rmdup.Lmean -o cyp1_rmdup.param cyp1-C*rmdup.rpkm C cyp1-T*rmdup.rpkm ; BitSeq/estimateDE -o cyp1_rmdup -p cyp1_rmdup.param cyp1-C*rmdup.rpkm C cyp1-T*rmdup.rpkm
+
+
 ------------
 
 #Mopti Treatment versus cyp1 treatment
