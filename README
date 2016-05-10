@@ -123,3 +123,15 @@ terminal:
 ssh -tL 9000:localhost:9543 bradmain@169.237.175.247 jupyter notebook --no-browser --port 9543 --port-retries=0
 web:
 localhost:9000/notebooks/gambiae/malphigs/Acol/cyp_expression.ipynb#
+
+
+
+#Run bitseq with variational Bayes (VB) for gene expression only (faster)
+#assumes we already ran BitSeq/parseAlignment
+mkdir VB
+link in .prob files
+for file in *.prob
+do
+echo "BitSeq/estimateVBExpression -o $(basename $file .prob) $file"
+done
+> runVB
