@@ -135,3 +135,6 @@ do
 echo "BitSeq/estimateVBExpression -o $(basename $file .prob) $file"
 done
 > runVB
+
+http://localhost:9000/notebooks/gambiae/malphigs/Acol/VB/VB_2.ipynb
+
