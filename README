@@ -110,10 +110,15 @@ BitSeq/getVariance --log -o all_rmdup.Lmean *rmdup.rpkm
 #estimate expression dependent hyperparameters
 BitSeq/estimateHyperPar --meanFile all.Lmean -o all.param Mopti-T*rpkm C cyp1-T*rpkm
 BitSeq/estimateHyperPar --meanFile all_rmdup.Lmean -o all_rmdup.param Mopti-T*rmdup.rpkm C cyp1-T*rmdup.rpkm
+  #treatment effect
+  BitSeq/estimateHyperPar --meanFile all.Lmean -o all_Teffect.param *-C*rpkm C *-T*rpkm 
+
 
 #estimate differential expression
 BitSeq/estimateDE -o all -p all.param Mopti-T*rpkm C cyp1-T*rpkm
 BitSeq/estimateDE -o all_rmdup -p all_rmdup.param Mopti-T*rmdup.rpkm C cyp1-T*rmdup.rpkm
+  #treatment effect
+  BitSeq/estimateDE -o all_Teffect -p all_Teffect.param *-C*rpkm C *-T*rpkm
 
 BitSeq/getGeneExpression -o data1-1_Genes.rpkm -t ensemblGenes.tr -G geneFile.txt data1-1.rpkm
 BitSeq/getGeneExpression -o Mopti-T3-YY_S189_genes.rpkm -t Mopti-T3-YY_S189.tr -G Mopti-T3-YY_S189_genes.txt Mopti-T3-YY_S189.rpkm
