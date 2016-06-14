@@ -130,6 +130,20 @@ web:
 localhost:9000/notebooks/gambiae/malphigs/Acol/cyp_expression.ipynb#
 
 
+#Calc diff expression with odd samples removed
+#compute overall mean and variance for each transcript
+BitSeq/getVariance --log -o allgood.Lmean *.rpkm 
+
+#estimate expression dependent hyperparameters
+BitSeq/estimateHyperPar --meanFile allgood.Lmean -o allgood.param C*rpkm C T*rpkm
+
+
+#estimate differential expression
+BitSeq/estimateDE -o treatment_E -p allgood.param C*rpkm C T*rpkm
+
+#sequenctially
+../BitSeq/getVariance --log -o allgood.Lmean *.rpkm ; ../BitSeq/estimateHyperPar --meanFile allgood.Lmean -o allgood.param *C*rpkm C *T*rpkm ; ../BitSeq/estimateDE -o treatment_E -p allgood.param *C*rpkm C *T*rpkm
+
 
 #Run bitseq with variational Bayes (VB) for gene expression only (faster)
 #assumes we already ran BitSeq/parseAlignment
