@@ -27,7 +27,7 @@ done
 BitSeq/getVariance --log -o experiment_name.Lmean *.rpkm 
 
 #estimate expression dependent hyperparameters
-BitSeq/estimateHyperPar --meanFile experiment_name.Lmean -o experiment_name.param Mopti-C*rpkm C Mopti-T*rpkm
+BitSeq/estimateHyperPar --meanFile experiment/_name.Lmean -o experiment_name.param Mopti-C/*rpkm C Mopti-T/*rpkm
 
 #estimate differential expression
 BitSeq/estimateDE -o Mopti -p experiment_name.param Mopti-C*rpkm C Mopti-T*rpkm
