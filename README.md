@@ -30,11 +30,11 @@ BitSeq/getVariance --log -o experiment_name.Lmean *.rpkm
 BitSeq/estimateHyperPar --meanFile experiment\_name.Lmean -o experiment_name.param Mopti-C\*rpkm C Mopti-T\*rpkm
 
 #estimate differential expression
-BitSeq/estimateDE -o Mopti -p experiment_name.param Mopti-C*rpkm C Mopti-T*rpkm
+BitSeq/estimateDE -o Mopti -p experiment_name.param Mopti-C\*rpkm C Mopti-T\*rpkm
 
 #You can run the above commands sequentially with a __;__ like:
 
-BitSeq/getVariance --log -o Mopti_rmdup.Lmean 'Mopti*rmdup.rpkm' ; BitSeq/estimateHyperPar --meanFile Mopti_rmdup.Lmean -o Mopti_rmdup.param Mopti-C*rmdup.rpkm C Mopti-T*rmdup.rpkm ; BitSeq/estimateDE -o Mopti_rmdup -p Mopti_rmdup.param Mopti-C*rmdup.rpkm C Mopti-T*rmdup.rpkm
+BitSeq/getVariance --log -o Mopti\_rmdup.Lmean 'Mopti\*rmdup.rpkm' ; BitSeq/estimateHyperPar --meanFile Mopti\_rmdup.Lmean -o Mopti\_rmdup.param Mopti-C\*rmdup.rpkm C Mopti-T\*rmdup.rpkm ; BitSeq/estimateDE -o Mopti\_rmdup -p Mopti_rmdup.param Mopti-C\*rmdup.rpkm C Mopti-T\*rmdup.rpkm
 
 
 #Mopti Treatment versus cyp1 treatment
