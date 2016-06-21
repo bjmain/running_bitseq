@@ -40,11 +40,13 @@ BitSeq/getVariance --log -o Mopti\_rmdup.Lmean 'Mopti\*rmdup.rpkm' ; BitSeq/esti
 
 #Mopti Treatment versus cyp1 treatment
 >compute overall mean and variance for each transcript
-BitSeq/getVariance --log -o all.Lmean *.rpkm 
+
+BitSeq/getVariance --log -o all.Lmean \*.rpkm 
 
 #estimate expression dependent hyperparameters
 BitSeq/estimateHyperPar --meanFile all.Lmean -o all.param Mopti-T\*rpkm C cyp1-T\*rpkm
 >treatment effect
+
 BitSeq/estimateHyperPar --meanFile all.Lmean -o all_Teffect.param \*-C\*rpkm C \*-T\*rpkm 
 
 
@@ -58,7 +60,9 @@ BitSeq/getGeneExpression -o Mopti-T3-YY\_S189\_genes.rpkm -t Mopti-T3-YY\_S189.t
 
 
 #Calc diff expression with "bad" samples removed
+
 >compute overall mean and variance for each transcript
+
 BitSeq/getVariance --log -o allgood.Lmean \*.rpkm 
 
 #estimate expression dependent hyperparameters
@@ -78,6 +82,7 @@ BitSeq/estimateDE -o treatment_E -p allgood.param C\*rpkm C T\*rpkm
 mkdir VB
 
 >link in .prob files
+
 for file in \*.prob
 
 do
