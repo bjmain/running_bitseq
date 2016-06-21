@@ -9,14 +9,18 @@ cd Bitseq
 make
 
 #step 1
->high-throughput. I split up the for loop into 4 groups (Mopti Ccontrol, treatment, cyp1 control, treatment) to speed things up.
-#Mopti
-for file in Mopti-C*sam
+for file in *sam
+
 do
+
 BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile $(basename $file .sam).tr --uniform --verbose
+
 BitSeq/estimateExpression $(basename $file .sam).prob -o $(basename $file .sam) --outType RPKM -p parameters1.txt -t $(basename $file .sam).tr -P 2
+
 BitSeq/getVariance -o $(basename $file .sam).mean $(basename $file .sam).rpkm
+
 done
+
 for file in Mopti-T*sam
 do
 BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile $(basename $file .sam).tr --uniform --verbose
