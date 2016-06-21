@@ -21,36 +21,20 @@ BitSeq/getVariance -o $(basename $file .sam).mean $(basename $file .sam).rpkm
 
 done
 
---------
+
 #differential expression
-
-#compute overall mean and variance for each transcript
-BitSeq/getVariance --log -o Mopti.Lmean Mopti*.rpkm 
-BitSeq/getVariance --log -o cyp1.Lmean cyp1*.rpkm 
-
-BitSeq/getVariance --log -o Mopti_rmdup.Lmean Mopti*rmdup.rpkm 
-BitSeq/getVariance --log -o cyp1_rmdup.Lmean cyp1*rmdup.rpkm 
+>compute overall mean and variance for each transcript
+BitSeq/getVariance --log -o experiment_name.Lmean *.rpkm 
 
 #estimate expression dependent hyperparameters
-BitSeq/estimateHyperPar --meanFile Mopti.Lmean -o Mopti.param Mopti-C*rpkm C Mopti-T*rpkm
-BitSeq/estimateHyperPar --meanFile cyp1.Lmean -o cyp1.param cyp1-C*rpkm C cyp1-T*rpkm
-
-BitSeq/estimateHyperPar --meanFile Mopti_rmdup.Lmean -o Mopti_rmdup.param Mopti-C*rmdup.rpkm C Mopti-T*rmdup.rpkm
-BitSeq/estimateHyperPar --meanFile cyp1_rmdup.Lmean -o cyp1_rmdup.param cyp1-C*rmdup.rpkm C cyp1-T*rmdup.rpkm
+BitSeq/estimateHyperPar --meanFile experiment_name.Lmean -o experiment_name.param Mopti-C*rpkm C Mopti-T*rpkm
 
 #estimate differential expression
-BitSeq/estimateDE -o Mopti -p Mopti.param Mopti-C*rpkm C Mopti-T*rpkm
-BitSeq/estimateDE -o cyp1 -p cyp1.param cyp1-C*rpkm C cyp1-T*rpkm
+BitSeq/estimateDE -o Mopti -p experiment_name.param Mopti-C*rpkm C Mopti-T*rpkm
 
-BitSeq/estimateDE -o Mopti_rmdup -p Mopti_rmdup.param Mopti-C*rmdup.rpkm C Mopti-T*rmdup.rpkm
-BitSeq/estimateDE -o cyp1_rmdup -p cyp1_rmdup.param cyp1-C*rmdup.rpkm C cyp1-T*rmdup.rpkm
-
-#run sequential commands in a screen:
+> You can run sequential commands in a screen like:
 BitSeq/getVariance --log -o Mopti_rmdup.Lmean Mopti*rmdup.rpkm ; BitSeq/estimateHyperPar --meanFile Mopti_rmdup.Lmean -o Mopti_rmdup.param Mopti-C*rmdup.rpkm C Mopti-T*rmdup.rpkm ; BitSeq/estimateDE -o Mopti_rmdup -p Mopti_rmdup.param Mopti-C*rmdup.rpkm C Mopti-T*rmdup.rpkm
-BitSeq/getVariance --log -o cyp1_rmdup.Lmean cyp1*rmdup.rpkm ; BitSeq/estimateHyperPar --meanFile cyp1_rmdup.Lmean -o cyp1_rmdup.param cyp1-C*rmdup.rpkm C cyp1-T*rmdup.rpkm ; BitSeq/estimateDE -o cyp1_rmdup -p cyp1_rmdup.param cyp1-C*rmdup.rpkm C cyp1-T*rmdup.rpkm
 
-
-------------
 
 #Mopti Treatment versus cyp1 treatment
 #compute overall mean and variance for each transcript
