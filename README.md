@@ -1,18 +1,14 @@
 # running_bitseq
-http://bitseq.github.io/
+[manual](http://bitseq.github.io/)
 
 #install
 git clone https://github.com/BitSeq/BitSeq.git
 cd Bitseq
 make
 
-
-#high-throughput. I split up the for loop into 4 groups (Mopti Ccontrol, treatment, cyp1 control, treatment) to speed things up.
+#step 1
+>high-throughput. I split up the for loop into 4 groups (Mopti Ccontrol, treatment, cyp1 control, treatment) to speed things up.
 #Mopti
-
-
-
-
 for file in Mopti-C*sam
 do
 BitSeq/parseAlignment $file -o $(basename $file .sam).prob --trSeqFile Anopheles-coluzzii-Mali-NIH_TRANSCRIPTS_AcolM1.2.fa --trInfoFile $(basename $file .sam).tr --uniform --verbose
