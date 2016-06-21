@@ -24,7 +24,8 @@ done
 
 #differential expression
 >compute overall mean and variance for each transcript
-BitSeq/getVariance --log -o experiment_name.Lmean *.rpkm 
+
+BitSeq/getVariance --log -o experiment_name.Lmean \*.rpkm 
 
 #estimate expression dependent hyperparameters
 BitSeq/estimateHyperPar --meanFile experiment\_name.Lmean -o experiment_name.param Mopti-C\*rpkm C Mopti-T\*rpkm
