@@ -3,7 +3,9 @@
 
 #install
 git clone https://github.com/BitSeq/BitSeq.git
+
 cd Bitseq
+
 make
 
 #step 1
